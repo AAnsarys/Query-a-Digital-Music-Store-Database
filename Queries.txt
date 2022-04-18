@@ -1,0 +1,60 @@
+Q1:
+
+SELECT C.CustomerId, C.FirstName,C.LastName,SUM(I.Total) AS TOTAL_PAID_AMOUNT
+FROM Customer C
+JOIN Invoice I
+ON C.CustomerId =I.CustomerId
+GROUP by 1
+ORDER by 4 DESC;
+
+
+
+
+Q2
+
+SELECT  G.Name,COUNT(IL.InvoiceLineId) AS Quantity_Sold
+FROM Track T
+JOIN InvoiceLine IL
+ON T.TrackId = IL.TrackId
+JOIN Genre G
+ON G.GenreId = T.GenreId
+GROUP BY 1
+ORDER BY 2 DESC
+limit 10;
+
+
+
+
+Q3
+
+SELECT AR.Name, count(G.Name) AS songs FROM Track T
+JOIN Genre G
+ON T.GenreId =G.GenreId
+JOIN Album A
+ON A.AlbumId = T.AlbumId
+JOIN Artist AR
+ON AR.ArtistId = A.ArtistId
+WHERE G.Name = 'Rock'
+GROUP by 1
+ORDER by 2 DESC
+LIMIT 10;
+
+
+
+
+
+Q4
+
+SELECT A.Name, SUM(IL.UnitPrice) AS Amount_Spent
+FROM Track T
+JOIN Album AL
+ON T.AlbumId = AL.AlbumId
+JOIN Artist A
+ON A.ArtistId = AL.ArtistId
+JOIN InvoiceLine IL
+ON IL.TrackId = T.TrackId
+JOIN Invoice I
+ON I.InvoiceId = IL.InvoiceId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
